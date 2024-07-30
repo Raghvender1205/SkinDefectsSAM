@@ -1,0 +1,9 @@
+python-box
+torch
+lightning
+lightning-fabric
+torchvision
+opencv-python
+pycocotools
+numpy
+segmentation-models-pytorch
