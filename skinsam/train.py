@@ -97,7 +97,7 @@ def train_skinsam(
                 loss_iou += F.mse_loss(iou_prediction, batch_iou, reduction='sum') / num_masks
 
             loss_total = 20. * loss_focal + loss_dice + loss_iou
-            optimizer.step()
+            optimizer.zero_grad()
             fabric.backward(loss_total)
             optimizer.step()
             scheduler.step()
