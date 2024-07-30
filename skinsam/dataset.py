@@ -25,8 +25,11 @@ class SkinDataset(Dataset):
     def __getitem__(self, idx):
         image_id = self.image_ids[idx]
         image_info = self.coco.loadImgs(image_id)[0]
-        image_path = os.path.join(self.root_dir, image_info['file_name'])
+        image_path = os.path.join(self.root_dir, 'images', image_info['file_name'])
         image = cv2.imread(image_path)
+        if image is None:
+            raise FileNotFoundError(
+                f"Unable to read the image at {image_path}. Please check the file path and integrity.")
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
         ann_ids = self.coco.getAnnIds(imgIds=image_id)
